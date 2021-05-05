@@ -1,0 +1,43 @@
+body {
+  background-color: rgba(255, 251, 246, 0.61);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.my-footer {
+  margin-bottom: 0px;
+}
+
+#userName {
+  background-color: transparent !important;
+  border: none;
+}
+
+#feedback-highlight {
+  animation: animate 1.5s linear infinite;
+  font-weight: bolder;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.my-content-container {
+  display: none;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0.3;
+    background-color: aqua;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}

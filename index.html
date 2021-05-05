@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Task App by Alankar Apte</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/afcf574cfe.js" crossorigin="anonymous"></script>
+
+    <!-- SWEETALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div class="container main-container">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a href="#" class="navbar-brand text-white font-weight-lighter">
+                <i class="fas fa-tasks"></i> WE.DO
+            </a>
+
+            <button class="navbar-toggler" id="myToggleButton" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <!-- <span class=""><i class="fas fa-user-circle p-1"></i></span> -->
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div class="form-inline my-2 my-lg-0 ml-auto float-right">
+                    <div class="text-right">
+                        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
+                        <label class="text-white form-control pr-0" id="userName"></label>
+                        <!-- <button class="  btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                        <button class="btn-sm btn-info btn-navbar" id="signoutbutton" type="button"
+                            onclick="googleSignOut()">
+                            Signout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="text-center middle p-3" id="welcomeMessege">
+            <p class="h5 py-3">Hi, welcome to 'WE.DO' (Community Task) by Alankar</p>
+            <!-- spinners -->
+            <div class="text-center middle p-5" id="loadingSpinners">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div id="signinbuttonDiv">
+                <button class="btn btn-primary" type="button" onclick="googleSignIn()">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+                <p class="h6 my-2 font-weight-light">Please login to continue</p>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="my-content-container">
+
+            <p class="text-center m-3 badge-warning">instruction: You can Add, Edit, Remove, update task items.
+                which
+                can be
+                visible to all.</p>
+
+
+            <div class="row">
+                <div class="col-md-6" id="firstsection">
+
+                    <p class="text-center font-weight-bold mb-3">Task</p>
+                    <form class="border p-4 mb-4 shadow">
+
+                        <div class="form-group ">
+                            <label>Task title</label>
+                            <input type="text" class="form-control" id="task-title" placeholder="Enter task title">
+                            <div class="invalid-feedback">
+                                Please enter valid title.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <textarea class="form-control" id="description" rows="3"
+                                placeholder="Enter your description"></textarea>
+                            <div class="invalid-feedback">
+                                Please enter valid description.
+                            </div>
+                        </div>
+
+                        <button type="button" id="button-create" class="btn btn-primary"><i class="fas fa-plus"></i>
+                            Add
+                            Task</button>
+                        <button type="button" id="button-update" class="btn btn-success" style="display: none;"><i
+                                class="fas fa-thumbs-up"></i> Update</button>
+                        <button type="button" id="button-refresh" class="btn btn-danger"><i class="fas fa-sync-alt"></i>
+                            Refresh</button>
+
+                    </form>
+
+                    <!-- Feedback from section -->
+                    <p class="text-center font-weight-bold m-0">Feedback</p>
+                    <p class="text-center font-weight-lighter m-0 badge-light" id="feedback-highlight">
+                        (your feedback will help me to improve features)
+                    </p>
+                    <form class="border p-4 mb-4 shadow" id="feedbackform">
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" id="feedback-name" placeholder="Your name">
+                                <div class="invalid-feedback">
+                                    Please enter valid title.
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="desc">Feedback</label>
+                                <textarea class="form-control" id="feedback-data" rows="3"
+                                    placeholder="Enter your feedback"></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter valid description (min four character)
+                                </div>
+                            </div>
+
+                            <button type="button" id="feedback-button" class="btn btn-success mt-2"><i
+                                    class="fas fa-thumbs-up"></i>
+                                Done
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-6 ">
+                    <p class="text-center font-weight-bold mb-3">Your task list</p>
+
+                    <div id="cardsection" style="overflow-y: scroll; max-height: 550px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-copyright text-center bg-dark text-white p-3 mb-0 my-footer fixed-bottom">
+            <div class="form-group row justify-content-center">
+                <div class="h4 m-0">
+                    <a href="https://www.linkedin.com/in/alankar-apte-0b6b1412a" target="_blank"
+                        class="badge badge-info badge-secondary ">
+                        <i class="fab fa-linkedin"></i> Connect
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <i class="fas fa-laptop-code"></i> Design & developed by Alankar Apte &copy; 2020
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- BOOTSTRAP dependancies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <!-- FIREBASE SCRIPT -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-analytics.js"></script> -->
+
+    <!-- firabase configuration -->
+    <script src="./js/firebase-config.js"></script>
+
+    <!-- my authentication script-->
+    <script src="./js/firebase-auth.js"></script>
+
+    <!-- My Script 1 -->
+    <script src="./js/app-scrip-1.js"></script>
+
+    <!-- My Script 2-->
+    <script src="./js/app-script-2.js"></script>
+
+
+</body>
+
+</html>
